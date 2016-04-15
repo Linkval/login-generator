@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by VinkHiker on 15/04/2016.
+ * Created by Linkval on 15/04/2016.
  */
 public class LoginServiceTest {
 

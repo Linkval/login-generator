@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by VinkHiker on 15/04/2016.
+ * Created by Linkval on 15/04/2016.
  */
 public class LoginGeneratorTest {
 
@@ -31,5 +31,15 @@ public class LoginGeneratorTest {
     @Test
     public void testPDURAccent() throws Exception {
         assertEquals("PDUR",lg.generateLoginForNomAndPrenom("Dùrand", "Paul"));
+    }
+
+    @Test
+    public void testPDU() throws Exception {
+        assertEquals("PDU", lg.generateLoginForNomAndPrenom("Du","Paul"));
+    }
+
+    @Test
+    public void testJRAL2() throws Exception {
+        assertEquals("JRAL2", lg.generateLoginForNomAndPrenom("Ralling","John"));
     }
 }
