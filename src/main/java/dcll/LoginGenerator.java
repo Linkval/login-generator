@@ -9,6 +9,16 @@ import java.util.regex.Pattern;
 public class LoginGenerator {
 
     /**
+     * Nombre de lettres max pour le nom.
+     */
+    public static final int NB_LETTRES_NOM_MAX = 3;
+
+    /**
+     * Nombre de lettres max pour le prénom.
+     */
+    public static final int NB_LETTRES_PRENOM_MAX = 1;
+
+    /**
      * Le service de login nécéssaire au generator.
      */
     private LoginService loginService;
@@ -41,11 +51,18 @@ public class LoginGenerator {
      */
     public final String generateLoginForNomAndPrenom(final String nom,
                                                      final String prenom) {
-        String p = deAccent(prenom.substring(0, 1).toUpperCase());
-        String n = deAccent(nom.substring(0, 3).toUpperCase());
+        String n;
+        String p = deAccent(prenom.substring(0,
+                NB_LETTRES_PRENOM_MAX).toUpperCase());
+        if (nom.length() < NB_LETTRES_NOM_MAX) {
+            n = deAccent(nom.substring(0, nom.length()).toUpperCase());
+        } else {
+            n = deAccent(nom.substring(0, NB_LETTRES_NOM_MAX).toUpperCase());
+        }
         String login = p + n;
         if (loginService.loginExists(login)) {
-            login = login + "1";
+            login = login + Integer.toString(
+                    loginService.findAllLoginsStartingWith(login).size());
         }
         loginService.addLogin(login);
         return login;
